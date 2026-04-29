@@ -30,6 +30,8 @@ This project compares Yahoo Finance, CRSP (WRDS), and Compustat (WRDS) and upgra
    - `python run_analysis.py`
 3. Run tests:
    - `pytest -q`
+4. Launch dashboard:
+   - `streamlit run dashboard/app.py`
 
 ## Generated Artifacts
 
@@ -40,6 +42,11 @@ This project compares Yahoo Finance, CRSP (WRDS), and Compustat (WRDS) and upgra
 - `outputs/recommendation_matrix.csv`
 - `docs/executive_summary.md`
 - `docs/recommendation_matrix.md`
+
+## Dashboard
+
+- App entrypoint: `dashboard/app.py`
+- Includes KPI cards, data quality diagnostics, risk-return and factor views, scenario analysis, and recommendation heatmap.
 
 ## Legacy Project Files
 
