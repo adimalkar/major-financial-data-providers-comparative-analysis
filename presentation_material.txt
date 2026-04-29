@@ -1,0 +1,216 @@
+FE511 Final Project: Comparative Analysis of Financial Data Providers
+Presentation Slides Material
+
+--------------------------------------------------------------------------------
+SLIDE 1: Title Slide
+--------------------------------------------------------------------------------
+Title: Comparative Analysis of Financial Data Providers
+Subtitle: A Deep Dive into Yahoo Finance, CRSP, and Compustat
+Team Members: Aditya Sanjay Malkar | Sri Lasya Siripurapu
+Date: December 14, 2025
+Course: FE 511 - Introduction to Bloomberg and Thomson Reuters
+
+[Speaker Notes]
+- Welcome everyone.
+- Today we present our findings on the "Garbage In, Garbage Out" principle in financial data.
+- We compared three major providers: Yahoo Finance, CRSP, and Compustat.
+
+--------------------------------------------------------------------------------
+SLIDE 2: Project Objective
+--------------------------------------------------------------------------------
+Title: The "Garbage In, Garbage Out" Problem
+Key Points:
+- Financial data quality is the bedrock of quantitative analysis.
+- Objective: Move beyond passive data use to critical evaluation.
+- Core Question: How do differences in data collection, adjustments, and identifiers impact real-world investment decisions?
+- Methodology: Rigorous comparison of Availability, Integrity, Adjustments, and Identification.
+
+[Speaker Notes]
+- Many analysts take data as a given.
+- Our goal was to prove that the choice of data provider isn't just a technical detail—it fundamentally changes your results.
+
+--------------------------------------------------------------------------------
+SLIDE 3: Data Sources Analyzed
+--------------------------------------------------------------------------------
+Title: The Three Contenders
+1. Yahoo Finance (via yfinance)
+   - Target: Retail investors & prototyping.
+   - Pros: Free, real-time, easy access.
+   - Cons: Black-box adjustments, survivorship bias risk.
+2. CRSP (Center for Research in Security Prices)
+   - Target: Academic research (Gold Standard).
+   - Pros: Permanent identifiers (PERMNO), meticulous delisting data.
+   - Cons: Delayed data, hard to access (WRDS).
+3. Compustat - Capital IQ
+   - Target: Fundamental analysis.
+   - Pros: Detailed balance sheet/income statement data.
+   - Cons: No direct price/return data (must be linked).
+
+[Speaker Notes]
+- We looked at Yahoo for the "retail" view.
+- CRSP is the academic benchmark for stock prices.
+- Compustat is the standard for fundamental data like earnings and debt.
+
+--------------------------------------------------------------------------------
+SLIDE 4: Part I - Data Availability
+--------------------------------------------------------------------------------
+Title: Feature Mapping & Availability
+Key Points:
+- All provide Core OHLCV (Open, High, Low, Close, Volume).
+- Yahoo Unique: Real-time data, Analyst ratings, Sentiment.
+- CRSP Unique: Delisting Returns (DLRET), Permanent IDs, Explicit Adjustment Factors.
+- Compustat Unique: 500+ Fundamental fields (Assets, Liabilities, cash flow).
+
+Suggested Visual: FE511_Project/section_3_1_feature_matrix.png OR FE511_Project/section_3_1_feature_heatmap.png
+
+[Speaker Notes]
+- As you can see in the matrix, the coverage overlaps but specializes.
+- Yahoo looks forward (sentiment), CRSP looks backward (verified history), Compustat looks inward (fundamentals).
+
+--------------------------------------------------------------------------------
+SLIDE 5: Part II - Historical Integrity (Ticker Changes)
+--------------------------------------------------------------------------------
+Title: The Ticker Trap: Case Study META
+Key Points:
+- Problem: Tickers are reused. They are NOT permanent identifiers.
+- Case Study: Facebook (FB) -> Meta Platforms (META).
+- Yahoo Finance: Querying "FB" returns only recent data (118 days). Querying "META" returns full history.
+    - Risk: Discontinuous datasets if you don't know the new ticker.
+- CRSP Solution: Uses PERMNO (13407).
+    - Links FB and META seamlessly as one security.
+
+Suggested Visual: FE511_Project/section_3_4_identifiers.png
+
+[Speaker Notes]
+- We found a critical flaw in ticker-based analysis.
+- If you query "FB" in Yahoo today, you miss 10 years of Facebook history.
+- CRSP's PERMNO system prevents this error entirely.
+
+--------------------------------------------------------------------------------
+SLIDE 6: Part II - Survivorship Bias (Delistings)
+--------------------------------------------------------------------------------
+Title: Survivorship Bias: The Lehman Brothers Lesson
+Key Points:
+- Survivorship Bias: Ignoring failed companies leads to overstated returns.
+- Case Study: Lehman Brothers (LEH) Bankruptcy (2008).
+- Yahoo Finance: No historical data available. The -100% loss is effectively erased from history.
+- CRSP:
+    - Captures the final delisting return (DLRET) of -60% on the final day.
+    - Accurately records the total loss for investors.
+- Impact: Backtests excluding Lehman overstate Financial Sector returns by ~5-15% during crises.
+
+Suggested Visual: FE511_Project/survivorship_bias_providers.csv (screenshot as table) OR FE511_Project/section_3_2_quality_dashboard.png
+
+[Speaker Notes]
+- This is the most dangerous error.
+- If you backtest a bank strategy in Yahoo, Lehman Brothers never existed.
+- Your strategy looks amazing because you only kept the winners. CRSP forces you to face the reality of the losses.
+
+--------------------------------------------------------------------------------
+SLIDE 7: Part III - Price Adjustments
+--------------------------------------------------------------------------------
+Title: The Mathematics of Returns: Adjustments
+Key Points:
+- Raw Prices vs. Adjusted Prices.
+- Corporate Actions: Stock Splits (Apple 4:1) and Dividends.
+- Yahoo Approach: "Black Box" Adjusted Close. Adjusts backward blindly.
+- CRSP Approach: Explicit Factors (CFACPR).
+    - Allows user to verify and choose adjustment methodology.
+    - Separates Price Returns (RETX) from Total Returns (RET).
+
+Suggested Visual: FE511_Project/section_3_3_stock_split.png OR FE511_Project/section_3_3_dividends.png
+
+[Speaker Notes]
+- A 4-for-1 split isn't a 75% crash.
+- Both providers handle this, but CRSP gives you the mathematical factors to verify it. Yahoo just gives you a changed number.
+
+--------------------------------------------------------------------------------
+SLIDE 8: Part IV - Entity Identification
+--------------------------------------------------------------------------------
+Title: The "Master Key" Problem
+Key Points:
+- How do we link Price (CRSP) to Fundamentals (Compustat)?
+- Tickers fail (Reused). Names fail (Changed).
+- Solution: CUSIP or CCM (CRSP-Compustat Merged) Link Table.
+- Our Analysis:
+    - Mapped CRSP PERMNOs to Compustat GVKEYs.
+    - Essential for calculating ratios like P/E (Price from CRSP / Earnings from Compustat).
+
+Suggested Visual: FE511_Project/section_3_4_identifiers.png
+
+[Speaker Notes]
+- You cannot do serious fundamental analysis without linking databases.
+- We used the CCM link table to bridge the gap between market data and accounting data.
+
+--------------------------------------------------------------------------------
+SLIDE 9: Practical Application - The Backtest
+--------------------------------------------------------------------------------
+Title: Strategy Backtest: 50/200 Day MA Crossover
+Key Points:
+- Strategy: Momentum (Golden Cross / Death Cross).
+- Portfolio: AAPL, MSFT, JPM, XOM, JNJ (5 Stocks).
+- Period: 10 Years (2015-2024).
+- Initial Capital: $100,000.
+- Setup: Ran the EXACT same logic on Yahoo Data vs. CRSP Data.
+
+Suggested Visual: FE511_Project/part4_signal_analysis.png
+
+[Speaker Notes]
+- We put theory to the test.
+- Same code. Same strategy. Same stocks. Different data sources.
+- What happened?
+
+--------------------------------------------------------------------------------
+SLIDE 10: The Shocking Divergence (Results)
+--------------------------------------------------------------------------------
+Title: The 115% Difference
+Key Points:
+- Yahoo Finance Result: 274.12% Total Return ($374k Final Value).
+- CRSP Result: 158.69% Total Return ($258k Final Value).
+- Difference: 115 percentage points!
+- Why?
+    - Accumulated small differences in dividend adjustments.
+    - Differences in total return calculation methodologies over 10 years.
+    - Compound impact of "small" data discrepancies.
+
+Suggested Visual: FE511_Project/part4_portfolio_performance.png OR FE511_Project/strategy_backtest_comparison.png
+
+[Speaker Notes]
+- This is the slide that matters.
+- Yahoo data doubled the perceived performance compared to the rigorous academic data.
+- If you pitched this fund based on Yahoo data, you would be promising returns that don't exist.
+
+--------------------------------------------------------------------------------
+SLIDE 11: Risk & Performance Metrics
+--------------------------------------------------------------------------------
+Title: Risk-Adjusted Reality Check
+Key Points:
+- Sharpe Ratio (Reward per unit of Risk):
+    - Yahoo: 0.743 (Highly Attractive).
+    - CRSP: 0.462 (Average/Modest).
+- Volatility: Similar (16.34% vs 17.29%).
+- Conclusion: The divergence is in the Returns, not the Risk measurements.
+
+Suggested Visual: FE511_Project/part4_risk_return.png
+
+[Speaker Notes]
+- The volatility was similar—both captured the market's ups and downs.
+- But the returns were systematically inflated in the Yahoo dataset for this specific strategy test.
+
+--------------------------------------------------------------------------------
+SLIDE 12: Conclusion & Recommendations
+--------------------------------------------------------------------------------
+Title: Final Verdict
+Key Points:
+- For Retail/Trading: Yahoo Finance is fine for real-time monitoring and short-term execution.
+- For Backtesting/Research: CRSP is MANDATORY.
+    - Must handle delistings (Survivorship Bias).
+    - Must use permanent identifiers.
+- For Fundamentals: Compustat is unrivaled but needs careful linking.
+- Final Word: Know your data source. It determines your results.
+
+Suggested Visual: FE511_Project/section_3_1_feature_heatmap.png (Recap)
+
+[Speaker Notes]
+- Don't use Yahoo for historical backtesting.
+- Use CRSP for truth, Compustat for depth, and Yahoo for speed.

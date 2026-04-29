@@ -1,0 +1,8 @@
+Feature,Yahoo Finance,CRSP,Compustat
+Historical Price Data,Sometimes,Yes,Sometimes
+Data Through Delisting,Sometimes,Yes,Sometimes
+Delisting Return (DLRET),No,YES (Critical),No
+Delisting Code,No,Yes (DLSTCD),No
+Delisting Date,No,Yes (DLSTDT),Limited
+Post-Delisting Data,No,Yes,No
+Bankruptcy Info,No,Yes (via codes),No

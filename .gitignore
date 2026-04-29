@@ -1,0 +1,11 @@
+.ipynb_checkpoints/
+codebase/
+All files/
+*.zip
+*.docx
+
+# Keep this local notebook private because it includes a hardcoded password prompt.
+Part_3,_Part_4.ipynb
+
+# Duplicate/experimental notebook not needed in public repo.
+FE_Part3_3_and_Part3_4_Yahoo_WRDS.ipynb

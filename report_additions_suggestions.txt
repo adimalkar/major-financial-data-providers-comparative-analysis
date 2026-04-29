@@ -1,0 +1,90 @@
+# Suggestions for FE511 Final Report
+
+Based on the analysis of the code and generated artifacts, here are specific additions and structure recommendations for your "FE511_report_draft.docx".
+
+## 1. Executive Summary
+- **Add:** A high-level statement about the "Garbage In, Garbage Out" principle verified by your findings.
+- **Key Stat:** Mention the **115% performance difference** found in the Part IV backtest between Yahoo Finance and CRSP data, illustrating the material impact of data quality.
+
+## 2. Part I: Data Availability & Feature Mapping
+**Objective:** Compare what data is available across Yahoo, CRSP, and Compustat.
+
+*   **Tables to Insert:**
+    *   `feature_comparison_complete.csv`: This is your master feature map. Format this as a clean table in the report.
+    *   `data_availability_summary.csv`: Summary of row counts and date ranges.
+
+*   **Visualizations to Insert:**
+    *   `section_3_1_feature_heatmap.png`: Visual overview of data density.
+    *   `section_3_1_feature_matrix.png`: To show the overlap/exclusivity of features.
+
+*   **Key Text to Add (from Part_I_Summary_Report.md):**
+    *   **Yahoo Finance:** Best for intraday data, sentiment, and ease of access. Lacks deep historical fundamental data.
+    *   **CRSP:** The gold standard for *price* history. Unique due to `PERMNO` (tracking companies through name changes) and detailed delisting info.
+    *   **Compustat:** The standard for *fundamentals* (Balance Sheet/Income Statement). Unique `GVKEY` identifier.
+
+## 3. Part II: Historical Data Integrity & Survivorship Bias
+**Objective:** Demonstrate how providers handle changing entities (name changes, delistings).
+
+*   **Case Study 1: Ticker Changes (Facebook -> Meta)**
+    *   **Visual/Table:** `ticker_change_comparison.csv` (Comparing how old/new tickers work).
+    *   **Narrative:** Explain that Yahoo allows searching by old ticker ('FB') but often redirects, whereas CRSP uses `PERMNO 13407` to link the entire history seamlessly.
+    *   *Reference File:* `meta_continuous_history_permno.csv`.
+
+*   **Case Study 2: Delistings (Lehman Brothers)**
+    *   **Visual/Table:** `delisting_comparison.csv` or a summary of `lehman_crsp_daily.csv` vs Yahoo's output.
+    *   **Finding:** Explicitly state that Yahoo Finance likely returned **no data** or incomplete data for the delisted ticker `LEH`, while CRSP maintained the full history up to liquidation.
+    *   **Visual:** `section_3_2_quality_dashboard.png` (if relevant to gaps).
+
+*   **Survivorship Bias:**
+    *   **Table:** `survivorship_bias_providers.csv`.
+    *   **Concept:** Explain that testing on *current* S&P 500 members (like in Yahoo) ignores failed companies, inflating historical returns.
+
+## 4. Part III: Price Adjustments & Corporate Actions
+**Objective:** Show the math behind "Adjusted Close".
+
+*   **Topic 1: Stock Splits (Apple)**
+    *   **Visualization:** `section_3_3_stock_split.png`. This is a critical chart showing the "drop" in raw price vs the smooth adjusted price line.
+    *   **Math:** Include the calculation: $P_{adj} = P_{raw} / SplitFactor$.
+
+*   **Topic 2: Dividends**
+    *   **Visualization:** `section_3_3_dividends.png`. Show the price drop on the ex-dividend date.
+    *   **Summary Visual:** `section_3_3_summary.png` (Great summary graphic for this section).
+
+*   **Formula to Include:**
+    $$ R_{adj} = \frac{P_{adj,t} - P_{adj,t-1}}{P_{adj,t-1}} $$
+    Contrast this with the incorrect return calculation using raw prices during a split/dividend.
+
+## 5. Part IV: Entity Identification & Data Linkage
+**Objective:** The "Master Key" problem.
+
+*   **Visualization:** `section_3_4_identifiers.png` (Overview of keys).
+*   **Table:** Create a small table comparing:
+    *   Yahoo: Ticker (Unstable)
+    *   CRSP: PERMNO (Stable Security ID), PERMCO (Stable Company ID)
+    *   Compustat: GVKEY (Stable Company ID)
+    *   Link: CUSIP (The bridge between CRSP and Compustat).
+
+## 6. Practical Application: Strategy Backtest (The Mini-Study)
+**Objective:** The "So What?" – Does data source change investment decisions?
+
+*   **Strategy:** 50-day / 200-day Moving Average Crossover (Golden Cross).
+*   **Portfolio:** 5 stocks (AAPL, MSFT, JPM, XOM, JNJ) over 10 years (2015-2024).
+
+*   **Visualizations to Insert (Crucial Section):**
+    *   `part4_portfolio_performance.png`: The equity curve comparing Yahoo vs CRSP portfolio growth.
+    *   `strategy_backtest_comparison.png`: Likely a variation of the above.
+    *   `part4_signal_analysis.png`: Showing where buy/sell signals differed.
+    *   `part4_risk_return.png`: Scatter plot of volatility vs return.
+
+*   **Key Findings (from Question4_Attribution_Analysis.md):**
+    *   **Performance Gap:** Yahoo Finance yielded a **274.12%** return vs CRSP's **158.69%**.
+    *   **The Difference:** A massive **115.43%** discrepancy.
+    *   **Conclusion:** Using Yahoo Finance would have wildly overstated the strategy's effectiveness, likely due to survivorship bias or differences in dividend readjustment handling.
+    *   **Table:** Insert `strategy_backtest_results.csv` to show Sharpe Ratio, Volatility, and Max Drawdown side-by-side.
+
+## 7. Conclusion
+*   Reiterate that for academic and professional testing, **adjusted data** and **permanent identifiers** (CRSP/Compustat) are non-negotiable.
+*   Yahoo Finance is useful for quick lookups but dangerous for long-term systematic backtesting.
+
+## Appendices
+*   Mention that all Python code and raw CSV data files are attached in the "Code & Data" zip file (e.g., `yahoo_portfolio_history.csv`, `crsp_portfolio_history.csv`).

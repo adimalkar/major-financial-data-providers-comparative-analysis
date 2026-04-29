@@ -1,0 +1,23 @@
+Feature,Yahoo Finance,CRSP,Compustat
+Open Price,Open,OPENPRC,N/A
+High Price,High,ASKHI,prchd
+Low Price,Low,BIDLO,prcld
+Close Price,Close,PRC,prccd
+Adjusted Close,Adj Close,Adjusted PRC,Via ajexdi
+Trading Volume,Volume,VOL,cshtrd
+Daily Return,Calculate,RET,Calculate
+Return ex-Dividends,N/A,RETX,N/A
+Delisting Return,N/A,DLRET,N/A
+Shares Outstanding,Via .info,SHROUT,csho
+Price Adjustment Factor,N/A,CFACPR,ajexdi
+Delisting Code,N/A,DLSTCD,N/A
+Permanent Security ID,Ticker only,PERMNO,N/A
+Permanent Company ID,N/A,PERMCO,N/A
+Global Company ID,N/A,N/A,GVKEY
+Sales/Revenue,Via financials,N/A,sale
+Total Assets,Via financials,N/A,at
+Net Income,Via financials,N/A,ni
+EBITDA,Via financials,N/A,ebitda
+Common Equity,Via financials,N/A,ceq
+Operating Cash Flow,Via financials,N/A,oancf
+Capital Expenditures,Via financials,N/A,capx

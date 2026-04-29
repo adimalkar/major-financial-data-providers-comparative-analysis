@@ -1,0 +1,4 @@
+Data Source,Old Ticker Works,New Ticker Works,Continuous History,Unique Identifier,Method,Reliability
+Yahoo Finance,Yes,Yes,Yes,Ticker only,Automatic linking,Medium
+CRSP,Via join,Via join,Yes (PERMNO),PERMNO,Join with dsenames,High
+Compustat,Via GVKEY,Via GVKEY,Yes (GVKEY),GVKEY,GVKEY lookup,High

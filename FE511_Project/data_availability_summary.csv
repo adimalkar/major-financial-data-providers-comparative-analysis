@@ -1,0 +1,13 @@
+Ticker,Company,Sector,Yahoo Days,CRSP Days,Compustat Days,Corporate Event
+AAPL,Apple Inc.,Technology,1255,1258,1493,Multiple stock splits
+MSFT,Microsoft Corp.,Technology,1255,1258,1493,None recent
+META,Meta Platforms,Technology,1255,792,1494,FB to META rebrand 2021
+JPM,JPMorgan Chase,Financial,1255,1258,1493,Acquired Bear Stearns 2008
+BAC,Bank of America,Financial,1255,1258,1493,Acquired Merrill Lynch 2008
+XOM,Exxon Mobil,Energy/Industrial,1255,1258,1493,Exxon-Mobil merger 1999
+CAT,Caterpillar Inc.,Industrial,1255,1258,1493,None recent
+BA,Boeing Co.,Aerospace/Industrial,1255,1258,1493,737 MAX crisis
+JNJ,Johnson & Johnson,Healthcare,1255,1258,1493,Kenvue spinoff 2023
+WMT,Walmart Inc.,Retail,1256,1258,1494,None recent
+DIS,Walt Disney Co.,Media/Entertainment,1255,1258,1494,Fox acquisition 2019
+T,AT&T Inc.,Telecom,1255,1258,1493,WarnerMedia spinoff 2022

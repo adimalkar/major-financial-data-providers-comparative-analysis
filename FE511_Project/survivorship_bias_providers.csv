@@ -1,0 +1,4 @@
+Data Source,Includes Delisted Companies,Delisting Returns Available,Historical Index Constituents,Risk of Survivorship Bias,Suitable for Backtesting,Best Use Case
+Yahoo Finance,Limited,No,No,HIGH,No,Current data
+CRSP,YES,YES (DLRET),YES,LOW,YES,Academic research
+Compustat,Partial,No,Limited,MEDIUM,With caution,Fundamentals
