@@ -1,0 +1,15 @@
+weights:
+  coverage_availability: 0.20
+  timeliness_reliability: 0.15
+  corporate_actions_integrity: 0.15
+  historical_survivorship: 0.20
+  schema_consistency: 0.15
+  cross_source_consistency: 0.15
+
+thresholds:
+  coverage_availability: 85
+  timeliness_reliability: 70
+  corporate_actions_integrity: 60
+  historical_survivorship: 80
+  schema_consistency: 90
+  cross_source_consistency: 75

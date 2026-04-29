@@ -9,3 +9,6 @@ Part_3,_Part_4.ipynb
 
 # Duplicate/experimental notebook not needed in public repo.
 FE_Part3_3_and_Part3_4_Yahoo_WRDS.ipynb
+__pycache__/
+.pytest_cache/
+*.pyc

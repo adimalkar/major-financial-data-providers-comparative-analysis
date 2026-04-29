@@ -1,17 +1,46 @@
-# FE511: Financial Data Providers Comparative Analysis
+# FE511: Comparative Analysis of Major Financial Data Providers
 
-Course project for FE511 (Introduction to Bloomberg and Thomson Reuters), comparing market data across Yahoo Finance, CRSP/WRDS, and Compustat.
+This project compares Yahoo Finance, CRSP (WRDS), and Compustat (WRDS) and upgrades the original course deliverable into a portfolio-grade analytics workflow for Data Analyst and Finance Analyst roles.
 
-## Repository Contents
+## Core Outcomes
 
-- `FE511_ProjectPart1.ipynb` to `FE511_ProjectPart4.ipynb`: main notebook workflow by project part.
-- `Question4.ipynb`: attribution and follow-up analysis notebook.
-- `FE511_Project/`: generated tables, figures, and written summaries used in the report.
-- `FE511 Financial Data Providers Report Final.pdf`: final project report.
-- `Final Project 2 Comparative Study.pdf`: supporting final write-up.
-- `presentation_material.txt` and `report_additions_suggestions.txt`: presentation and report notes.
+- Formal data quality scoring across providers.
+- Risk-adjusted financial metrics and factor diagnostics.
+- Scenario and sensitivity analysis.
+- Recommendation matrix by use case.
+- One-command reproducible pipeline.
 
-## Notes
+## Repository Structure
 
-- This repository includes project outputs for reproducibility and review.
-- Temporary, duplicate, and checkpoint files are excluded from version control.
+- `src/data_quality/`: quality metrics, thresholds, and provider scorecard logic.
+- `src/finance/`: return engineering, risk metrics, factor model, and scenario analysis.
+- `config/quality_thresholds.yaml`: configurable metric weights and pass/fail thresholds.
+- `run_analysis.py`: end-to-end pipeline runner.
+- `outputs/`: generated scorecards and analytics tables.
+- `docs/`: project brief, criteria, executive summary, and recommendation matrix.
+- `tests/`: automated checks for metrics and pipeline smoke tests.
+- `FE511_Project/`: original source data exports used as pipeline inputs.
+- Root notebooks: original project narrative notebooks.
+
+## Quick Start
+
+1. Install dependencies:
+   - `pip install -r requirements.txt`
+2. Run the pipeline:
+   - `python run_analysis.py`
+3. Run tests:
+   - `pytest -q`
+
+## Generated Artifacts
+
+- `outputs/provider_data_quality_scorecard.csv`
+- `outputs/provider_risk_metrics.csv`
+- `outputs/factor_exposure_summary.csv`
+- `outputs/scenario_sensitivity_analysis.csv`
+- `outputs/recommendation_matrix.csv`
+- `docs/executive_summary.md`
+- `docs/recommendation_matrix.md`
+
+## Legacy Project Files
+
+The original notebooks, final report PDFs, and `FE511_Project/` exports are preserved for transparency and reproducibility.

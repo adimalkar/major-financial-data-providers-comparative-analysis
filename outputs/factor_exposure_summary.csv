@@ -1,0 +1,4 @@
+provider,alpha_annual,beta,r_squared,model
+Yahoo,0.0,1.0,1.0,CAPM (market proxy)
+Compustat,-0.013785,1.066982,0.936811,CAPM (market proxy)
+CRSP,0.010055,0.937252,0.92404,CAPM (market proxy)

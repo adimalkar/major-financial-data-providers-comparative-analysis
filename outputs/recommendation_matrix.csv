@@ -1,0 +1,4 @@
+provider,weighted_score,sharpe_ratio,max_drawdown,r_squared,research_prototyping_score,institutional_backtesting_score,corporate_actions_research_score,education_demo_score
+CRSP,99.18,0.525167,-0.302244,0.92404,83.487,77.4635,87.9068,64.9647
+Compustat,84.18,0.40608,-0.379906,0.936811,73.4837,66.2104,77.6622,58.5238
+Yahoo,83.36,0.769147,-0.289455,1.0,85.5864,77.11,78.352,61.8675

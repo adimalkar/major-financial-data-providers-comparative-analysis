@@ -1,0 +1,4 @@
+provider,bull_mean_return,bear_mean_return,regime_delta_bull_minus_bear,mean_return_63d,mean_return_126d,mean_return_252d
+Compustat,0.009007,-0.009964,0.018972,0.00069,0.001027,0.000782
+Yahoo,0.006307,-0.006704,0.013011,-6.5e-05,-5.6e-05,0.000387
+CRSP,0.005727,-0.006296,0.012023,-0.000495,-0.000597,0.000274

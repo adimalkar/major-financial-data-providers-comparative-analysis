@@ -1,0 +1,4 @@
+provider,observations,annualized_return,annualized_volatility,sharpe_ratio,sortino_ratio,max_drawdown
+Yahoo,2514,0.1414,0.163369,0.769147,0.939864,-0.289455
+CRSP,2515,0.099917,0.172863,0.525167,0.543655,-0.302244
+Compustat,1492,0.093035,0.245648,0.40608,0.453492,-0.379906
